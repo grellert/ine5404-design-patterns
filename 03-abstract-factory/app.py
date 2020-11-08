@@ -76,7 +76,7 @@ class MacOSFactory(GUIFactory):
         return MacOSWindow()
 
 
-# Aplicação cliente
+# Aplicação cliente depende somente da abstração
 class Application:
     def __init__(self, factory: GUIFactory):
         self.__factory = factory
