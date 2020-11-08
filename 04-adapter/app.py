@@ -11,10 +11,11 @@ class Adaptee:
         return (1, "Mateus Grellert")
 
 
-class Adapter(ITarget, Adaptee):
+class Adapter(ITarget):
+    __adaptee = Adaptee()
     # Adapter torna a interface do Adaptado (Adaptee) compatível com o Alvo através de herança múltipla
     def request(self) -> str:
-        (id, name) = self.specific_request()
+        (id, name) = self.__adaptee.specific_request()
         return f'{name}\n'
 
 # Target implementa a interface ITarget com compartamento esperado

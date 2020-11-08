@@ -29,9 +29,10 @@ class DrawingAPI3(DrawingAPI):
         return "API3.circle at {0}:{1} - radius: {2}".format(x, y, radius)
 
 # Enviamos a interface Drawing API como ref no construtor
+# Nossa bridge se configura na composição com drawing_api
 class Shape(ABC):
-    def __init__(self, drawing_api):
-        self.drawing_api = drawing_api
+    def __init__(self, api: DrawingAPI):
+        self.drawing_api = api
 
     @abstractmethod
     def draw(self):
@@ -58,7 +59,7 @@ class CircleShape(Shape):
         self.radius *= 1 + percent / 100
 
 
-class BridgePatternExample(object):
+class Cliente(object):
     @staticmethod
     def test():
         # Criamos três combinações diferentes sem precisar criar uma classe especializada pra cada
@@ -68,9 +69,10 @@ class BridgePatternExample(object):
             CircleShape(5.0, 4.0, 12.0, DrawingAPI3()),
         ]
 
+        # polimorfismo pela classe abstrata Shape
         for shape in shapes:
             shape.resize_by_percentage(2.5)
             print(shape.draw())
 
 
-BridgePatternExample.test()
+Cliente.test()

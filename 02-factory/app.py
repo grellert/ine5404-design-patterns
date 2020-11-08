@@ -7,6 +7,11 @@ class MazeGame(ABC):
     def __init__(self) -> None:
         self.rooms = []
         self._prepare_rooms()
+   
+    # Factory method make_room será especializado para cada tipo de sala
+    @abstractmethod
+    def make_room(self):
+        raise NotImplementedError("You should implement this!")
 
     def _prepare_rooms(self) -> None:
         room1 = self.make_room()
@@ -19,10 +24,6 @@ class MazeGame(ABC):
     def play(self) -> None:
         print('Playing using "{}"'.format(self.rooms[0]))
 
-    # Factory method make_room será especializado para cada tipo de sala
-    @abstractmethod
-    def make_room(self):
-        raise NotImplementedError("You should implement this!")
 
 
 # classe derivada 1 - escializa make_room criando uma sala mágica

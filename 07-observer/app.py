@@ -1,6 +1,6 @@
+from abc import ABC, abstractmethod
 
-
-class Observable:
+class Publisher:
     def __init__(self):
         self._observers = []
     
@@ -11,15 +11,27 @@ class Observable:
         for observer in self._observers:
             observer.notify(self, *args, **kwargs)
 
-class Observer:
-    def __init__(self, observable):
-        observable.register_observer(self)
+class Subscriber(ABC):
+    def __init__(self, pub: Publisher):
+        pub.register_observer(self)
     
+    @abstractmethod
+    def notify(self):
+        pass
+
+class Subscriber1(Subscriber):
     def notify(self, observable, *args):
         print('Recebido', args, 'de', observable)
+        print('Atualizando BD')
+
+class Subscriber2(Subscriber):    
+    def notify(self, observable, *args):
+        print('Recebido', args, 'de', observable)
+        print('Notificando usuários do canal')
 
 
-subject = Observable()
-observer1 = Observer(subject)
-observer2 = Observer(subject)
-subject.notify_observers('test')
+pub = Publisher()
+sub1= Subscriber1(pub)
+sub2 = Subscriber2(pub)
+
+pub.notify_observers('test')
