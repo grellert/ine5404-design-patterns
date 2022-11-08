@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-# Factory MazeGame que criar jogos do tipo labirinto com salas (produtos) distintas
+# Factory MazeGame que cria jogos do tipo labirinto com salas (produtos) distintas
 class MazeGame(ABC):
     def __init__(self) -> None:
         self.rooms = []
